@@ -3,7 +3,9 @@ package com.qrencia.inventoryapp.controller;
 import com.qrencia.inventoryapp.dto.ProductDto;
 import com.qrencia.inventoryapp.entity.Product;
 import com.qrencia.inventoryapp.service.ProductService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,7 +27,7 @@ public class ProductController {
     }
 
     @PostMapping
-    public ProductDto addProduct(@RequestBody ProductDto request){
+    public ProductDto addProduct(@RequestBody @Valid ProductDto request){
         return productService.addProduct(request);
     }
 

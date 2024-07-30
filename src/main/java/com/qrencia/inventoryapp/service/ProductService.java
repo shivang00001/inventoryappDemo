@@ -65,4 +65,22 @@ public class ProductService {
         }
         return productOptional.get();
     }
+
+    public List<ProductDto> getByPriceRange(String priceRange) {
+        switch (priceRange) {
+            case "lessThan100":
+                return productRepository.findByPriceBetween(Double.MIN_VALUE, 100.00)
+                        .stream().map(ProductDto::new).toList();
+
+            case "100to300":
+                return productRepository.findByPriceBetween(100.00, 300.00)
+                        .stream().map(ProductDto::new).toList();
+
+            case "moreThan300":
+                return productRepository.findByPriceBetween(300.00, Double.MAX_VALUE)
+                        .stream().map(ProductDto::new).toList();
+
+        }
+        return null;
+    }
 }
